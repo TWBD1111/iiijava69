@@ -12,6 +12,8 @@ public class test27 {
 		System.out.println(s1);
 		Scooter s3 = new Scooter();
 		System.out.println(s3);
+		System.out.println(s1 == s2);
+		System.out.println(s1.equals(s2));
 	}
 
 }

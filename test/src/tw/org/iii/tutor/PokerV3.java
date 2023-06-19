@@ -31,7 +31,8 @@ public class PokerV3 {
 		for (int[] player : players) {
 			Arrays.sort(player);
 			for (int card : player) {
-				System.out.printf("%s%s ",colors[card/13],nums[card%13]);
+				System.out.printf("%s%s ",colors[card/13],nums[card%13]);//按花色排
+				//System.out.printf("%s%s ",colors[card%4],nums[card/4]);//按數字排
 			}
 			System.out.println();
 		}
