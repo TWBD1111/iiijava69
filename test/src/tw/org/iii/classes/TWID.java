@@ -23,7 +23,7 @@ public class TWID {
 		String c1 = letters.substring(area, area + 1);
 		StringBuffer sb = new StringBuffer(c1);
 		sb.append(isMale ? "1" : "2");
-		for (int i = 0; i <= 7; i++) {
+		for (int i = 0; i < 7; i++) {
 			sb.append((int) (Math.random() * 10));
 
 		}
