@@ -7,48 +7,79 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class GuessNumber extends JFrame{
-	private JButton guess;//,b1,b2;
+public class GuessNumber extends JFrame {
+	private JButton guess;// ,b1,b2;
 	private JTextField input;
 	private JTextArea log;
 	private String answer;
-	
-	
+	private int counter;
+
 	public GuessNumber() {
 		super("猜數字");
-		guess = new JButton("猜");//b1 =new JButton("B1");b2 =new JButton("B2");
+		guess = new JButton("猜");// b1 =new JButton("B1");b2 =new JButton("B2");
 		input = new JTextField();
 		log = new JTextArea();
-		//setLayout(new FlowLayout(FlowLayout.RIGHT));
-		//add(guess);add(b1);add(b2);
+		// setLayout(new FlowLayout(FlowLayout.RIGHT));
+		// add(guess);add(b1);add(b2);
 		setLayout(new BorderLayout());
 		JPanel top = new JPanel(new BorderLayout());
-		add(top,BorderLayout.NORTH);
-		top.add(guess,BorderLayout.EAST);
-		top.add(input,BorderLayout.CENTER);
-		add(log,BorderLayout.CENTER);
-		
+		add(top, BorderLayout.NORTH);
+		top.add(guess, BorderLayout.EAST);
+		top.add(input, BorderLayout.CENTER);
+		add(log, BorderLayout.CENTER);
+
 		setSize(640, 480);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		guess.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("OK");
+				guess();
 			}
 		});
 		initGame();
 	}
+
 	private void initGame() {
-		answer = createAnser();
-		System.out.println(answer);
+		answer = createAnser(3);
+		counter = 0;
+
 	}
-	private String createAnser() {
+
+	private void guess() {
+		counter++;
+		String g = input.getText();
+		String result = checkAB(g);
+		log.append(String.format("%d . %s = > %s\n",counter,g,result));
+		input.setText("");
+		if(g.equals(answer)) {
+			JOptionPane.showMessageDialog(null, "恭喜");
+		}else if (counter == 10) {
+			JOptionPane.showMessageDialog(null, "Loser : answer:"+answer);
+		}
+	}
+
+	private String checkAB(String g) {
+		int A, B;
+		A = B = 0;
+		for(int i=0;i<answer.length();i++) {
+			char c = g.charAt(i);
+			if(c==answer.charAt(i)) {
+				A++;
+			}else if (answer.indexOf(c)>=0) {
+				B++;
+			}
+		}
+		return String.format("%dA%dB",A,B);
+	}
+
+	private String createAnser(int d) {
 		int num = 10;
 		int[] poker = new int[num];
 		for (int i = 0; i < poker.length; i++)
@@ -60,10 +91,12 @@ public class GuessNumber extends JFrame{
 			poker[i] = temp;
 		}
 		StringBuffer sb = new StringBuffer();
-		sb.append(poker[0]).append(poker[1]).append(poker[2]);
+		for (int i = 0; i < d; i++) {
+			sb.append(poker[i]);
+		}
 		return sb.toString();
 	}
-	
+
 	public static void main(String[] args) {
 		new GuessNumber();
 
