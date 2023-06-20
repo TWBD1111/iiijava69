@@ -43,6 +43,14 @@ public class TWID {
 	private TWID(String id) {
 		this.id = id;
 	}
+	public static TWID newTWID(String id) {
+		if(isRightID(id)) {
+			return new TWID(id);
+			
+		}else
+			return null;
+		
+	}
 
 	public static boolean isRightID(String id) {
 		boolean isRight = false;
