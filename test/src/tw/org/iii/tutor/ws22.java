@@ -1,4 +1,6 @@
-package tw.org.iii.classes;
+package tw.org.iii.tutor;
+
+import tw.org.iii.classes.Scooter;
 
 public class ws22 {
 
