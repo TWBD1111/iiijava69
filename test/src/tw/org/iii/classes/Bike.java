@@ -1,6 +1,8 @@
 package tw.org.iii.classes;
 
-public class Bike {
+import java.io.Serializable;
+
+public class Bike implements Serializable{
 	protected double speed;
 	public String owner;
 	//建構式/子/方法
@@ -9,7 +11,7 @@ public class Bike {
 		
 	}
 	public Bike(String name) {
-		System.out.println("Bike()");
+		System.out.println("Bike(String)");
 		owner = name;
 	}
 	public void upSpeed() {
