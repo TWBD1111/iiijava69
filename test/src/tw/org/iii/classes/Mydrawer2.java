@@ -13,50 +13,57 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class Mydrawer extends JPanel {
-	private LinkedList<LinkedList<HashMap<String, Integer>>> lines, garbage;
+public class Mydrawer2 extends JPanel {
+	private LinkedList<Line> lines, garbage;
+	private Color nowColor;
+	private float nowWidth;
 
-	public Mydrawer() {
+	public Mydrawer2() {
 		lines = new LinkedList<>();
 		garbage = new LinkedList<>();
 		setBackground(Color.yellow);
 		MyListener myListener = new MyListener();
 		addMouseListener(myListener);
 		addMouseMotionListener(myListener);
+		nowColor = Color.BLUE;
+		nowWidth = 4;
+	}
+
+	public void setColor(Color newColor) {
+		nowColor = newColor;
+	}
+
+	public Color getColor() {
+		return nowColor;
+	}
+
+	public void setWidth(float newWidth) {
+		newWidth = newWidth;
 	}
 
 	private class MyListener extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			int x = e.getX(), y = e.getY();
-			HashMap<String, Integer> point = new HashMap<>();
-			point.put("x", x);
-			point.put("y", y);
-			LinkedList<HashMap<String, Integer>> line = new LinkedList<>();
-			line.add(point);
+			Line line = new Line(nowColor, nowWidth);
+			line.addPoint(x, y);
 			lines.add(line);
 			garbage.clear();
 			repaint();
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-
-		}
-
-		@Override
 		public void mouseDragged(MouseEvent e) {
 			int x = e.getX(), y = e.getY();
-			HashMap<String, Integer> point = new HashMap<>();
-			point.put("x", x);
-			point.put("y", y);
-			lines.getLast().add(point);
+
+			lines.getLast().addPoint(x, y);
 			repaint();
 		}
 	}
@@ -65,14 +72,12 @@ public class Mydrawer extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.BLUE);
-		g2d.setStroke(new BasicStroke(4));
-		for (LinkedList<HashMap<String, Integer>> line : lines) {
-			for (int i = 1; i < line.size(); i++) {
-				HashMap<String, Integer> p0 = line.get(i - 1);
-				HashMap<String, Integer> p1 = line.get(i);
-				g2d.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"));
 
+		for (Line line : lines) {
+			g2d.setColor(line.getColor());
+			g2d.setStroke(new BasicStroke(line.getWidth()));
+			for (int i = 1; i < line.getSize(); i++) {
+				g2d.drawLine(line.getPointX(i - 1), line.getPointY(i - 1), line.getPointX(i), line.getPointY(i));
 			}
 		}
 	}
@@ -112,8 +117,8 @@ public class Mydrawer extends JPanel {
 
 	public void saveLines() throws Exception {
 		try (ObjectOutputStream oout = new ObjectOutputStream(new FileOutputStream("dir1/ws1.sign"))) {
-		oout.writeObject(lines);
-		oout.flush();
+			oout.writeObject(lines);
+			oout.flush();
 		}
 		;
 	}
@@ -121,8 +126,49 @@ public class Mydrawer extends JPanel {
 	public void loadLines() throws Exception {
 		ObjectInputStream oin = new ObjectInputStream(new FileInputStream("dir1/ws1.sign"));
 		Object obj = oin.readObject();
-		lines=(LinkedList<LinkedList<HashMap<String, Integer>>>)obj;
+		lines = (LinkedList<Line>) obj;
 		oin.close();
 		repaint();
 	}
+}
+
+class Line implements Serializable {
+	LinkedList<HashMap<String, Integer>> points;
+	private Color color;
+	private float width;
+
+	public Line(Color color, float width) {
+		points = new LinkedList<>();
+		this.color = color;
+		this.width = width;
+
+	}
+
+	public void addPoint(int x, int y) {
+		HashMap<String, Integer> point = new HashMap<>();
+		point.put("x", x);
+		point.put("y", y);
+		points.add(point);
+	}
+
+	public int getPointX(int index) {
+		return points.get(index).get("x");
+	}
+
+	public int getPointY(int index) {
+		return points.get(index).get("y");
+	}
+
+	public int getSize() {
+		return points.size();
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
 }
