@@ -48,15 +48,15 @@ public class MyPanel2 extends JPanel {
 		balls.add(ball);
 		Timer timer = new Timer();
 		timer.schedule(ball, 0, 10);
-		repaint();
+		//repaint();
 	}
 
 	private class BallTask extends TimerTask {
 		int x, y;
 		int xSpeed, ySpeed;
 		public BallTask() {
-			xSpeed = (int) (Math.random() * 10) - 5; 
-			ySpeed = (int) (Math.random() * 10) - 5;
+			xSpeed = (int) (Math.random() * 10)-5; 
+			ySpeed = (int) (Math.random() * 10)-5;
 		}
 
 		@Override
