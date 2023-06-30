@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 import tw.org.iii.classes.MyPanel;
-import tw.org.iii.classes.MyPanel2;
 
 public class MyBallGame extends JFrame{
 	private MyPanel myPanel;
