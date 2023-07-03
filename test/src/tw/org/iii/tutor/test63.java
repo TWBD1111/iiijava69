@@ -8,11 +8,11 @@ import java.net.SocketException;
 public class test63 {
 
 	public static void main(String[] args) {
-		String mesg="Hellp,world";
+		String mesg="聽說你還在等";
 		byte[] data=mesg.getBytes();
 		try {
 			DatagramSocket socket = new DatagramSocket();
-			DatagramPacket packet = new DatagramPacket(data, data.length,InetAddress.getByName("10.0.101.123"),1111);
+			DatagramPacket packet = new DatagramPacket(data, data.length,InetAddress.getByName("10.0.101.255"),1111);
 			socket.send(packet);
 			socket.close();
 			
