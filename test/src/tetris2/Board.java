@@ -26,7 +26,7 @@ public class Board extends JPanel implements KeyListener {
 	private int FPS = 60, delay = FPS / 1000;
 	private Random random;
 
-	private Color[] colors = { Color.decode("#3A538C"), Color.decode("#FFF2F0"), Color.decode("#fff200"),
+	private Color[] colors = { Color.decode("#3A538C"), Color.red, Color.decode("#fff200"),
 			Color.decode("#22b14c"), Color.decode("#00a2e8"), Color.decode("#a349a4"), Color.decode("#3f48cc") };
 
 	public Board() {
@@ -50,7 +50,7 @@ public class Board extends JPanel implements KeyListener {
 
 		currentShape = shapes[0];
 		looper = new Timer(delay, new ActionListener() {
-			int n = 0;
+			
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -141,6 +141,7 @@ public class Board extends JPanel implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			currentShape.speedUP();
+			
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			currentShape.moveRight();
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {

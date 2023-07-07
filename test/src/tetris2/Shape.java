@@ -67,7 +67,7 @@ public class Shape {
 		}
 		deltaX = 0;
 		if (System.currentTimeMillis() - beginTime > delayTimeForMovement) {
-			// vertical movement
+			// 垂直移動
 			if (!(y + 1 + coords.length > BD_HEIGHT)) {// 判斷觸底
 				for (int row = 0; row < coords.length; row++) {
 					for (int col = 0; col < coords[row].length; col++) {
