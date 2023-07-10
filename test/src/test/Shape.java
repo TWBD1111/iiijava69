@@ -144,11 +144,12 @@ public class Shape {
                 if (board.getBoard()[i][j] != null) {//计算当前行中已被填充的方块数量
                     count++;
                 }
-
+                //將遊戲區域中的方塊從原始位置複製到新的位置。這樣做的目的是將非完整的行向下移動以填充被消除的行的位置
                 board.getBoard()[size][j] = board.getBoard()[i][j];
             }
             if (count < board.getBoard()[0].length) {//用于检查当前行是否是完整的行
-                size--;
+            	//如果當前行不是完整的行，則將size減少 1，向上移動一行
+            	size--;
                 
             }
             

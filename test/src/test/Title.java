@@ -8,7 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -22,7 +25,11 @@ public class Title extends JPanel implements KeyListener {
 	
 	
 	public Title(WindowGame window){
-                instructions = ImageLoader.loadImage("/arrow.png");
+        try {
+			instructions = ImageIO.read(new File("dir1/arrow.png"));
+		} catch (IOException e) {
+			System.out.println(e);
+		}
 		timer = new Timer(1000/60, new ActionListener(){
 
 			@Override

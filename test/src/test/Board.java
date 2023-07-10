@@ -12,22 +12,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Board extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
 
-	//Assets
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     private BufferedImage pause, refresh;
 
-	//board dimensions (the playing area)
+    //棋盤尺寸（遊戲區域）
     private final int boardHeight = 20, boardWidth = 10;
 
 	// block size
@@ -36,20 +35,20 @@ public class Board extends JPanel implements KeyListener, MouseListener, MouseMo
 	// field
     private Color[][] board = new Color[boardHeight][boardWidth];
 
-	// array with all the possible shapes
+	// 方塊形狀
     private Shape[] shapes = new Shape[7];
 
-	// currentShape
+    // 當前方塊,下個方塊
     private static Shape currentShape, nextShape;
 
-	// game loop
+    // 遊戲循環
     private Timer looper;
 
     private int FPS = 60;
 
     private int delay = 1000 / FPS;
 
-	// mouse events variables
+    // 鼠標事件變量
     private int mouseX, mouseY;
 
     private boolean leftClick = false;
@@ -72,13 +71,19 @@ public class Board extends JPanel implements KeyListener, MouseListener, MouseMo
         }
     });
 
-	// score
+	// 分數
     private int score = 0;
 
     public Board() {
 
-        pause = ImageLoader.loadImage("/pause.png");
-        refresh = ImageLoader.loadImage("/refresh.png");
+        try {
+			pause = ImageIO.read(getClass().getResource("pause.png"));
+			refresh = ImageIO.read(getClass().getResource("refresh.png"));
+		} catch (Exception e) {
+
+			System.out.println(e);
+		}
+        
 
         mouseX = 0;
         mouseY = 0;
@@ -154,6 +159,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, MouseMo
 
                 if (board[row][col] != null) {
                     g.setColor(board[row][col]);
+                    //(左上角 x 座標,左上角 y 座標,寬度,高度)
                     g.fillRect(col * blockSize, row * blockSize, blockSize, blockSize);
                 }
 
