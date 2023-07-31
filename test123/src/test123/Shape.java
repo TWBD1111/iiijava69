@@ -51,7 +51,7 @@ public class Shape {
         time += deltaTime;
         lastTime = System.currentTimeMillis();
 
-        if (collision && timePassedFromCollision > 50) {//当方块发生碰撞并且经过一定时间（大于100毫秒）后，会执行这段代码的逻辑。
+        if (collision && timePassedFromCollision > 150) {//当方块发生碰撞并且经过一定时间（大于100毫秒）后，会执行这段代码的逻辑。
             for (int row = 0; row < coords.length; row++) {
                 for (int col = 0; col < coords[0].length; col++) {
                     if (coords[row][col] != 0) {
@@ -61,7 +61,7 @@ public class Shape {
             }
             checkLine();
             
-            board.addScore();
+            
             
             board.setCurrentShape();
             timePassedFromCollision = -1;
@@ -151,6 +151,8 @@ public class Shape {
             	//如果當前行不是完整的行，則將size減少 1，向上移動一行
             	size--;
                 
+            }else {
+            	board.addScore();
             }
             
         }

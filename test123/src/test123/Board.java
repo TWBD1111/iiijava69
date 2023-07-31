@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -25,6 +26,7 @@ public class Board extends JPanel implements KeyListener, MouseListener, MouseMo
     private static final long serialVersionUID = 1L;
 
     private BufferedImage pause, refresh;
+    
 
     //棋盤尺寸（遊戲區域）
     private final int boardHeight = 20, boardWidth = 10;
@@ -77,8 +79,9 @@ public class Board extends JPanel implements KeyListener, MouseListener, MouseMo
     public Board() {
 
         try {
-			pause = ImageIO.read(getClass().getResource("Pause.png"));
-			refresh = ImageIO.read(getClass().getResource("refresh.png"));
+			pause = ImageIO.read(getClass().getResource("/pause.png"));
+        	
+			refresh = ImageIO.read(getClass().getResource("/refresh.png"));
 		} catch (Exception e) {
 
 			System.out.println(e);

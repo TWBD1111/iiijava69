@@ -26,7 +26,7 @@ public class Title extends JPanel implements KeyListener {
 	
 	public Title(WindowGame window){
         try {
-			instructions = ImageIO.read(getClass().getResource("arrow.png"));
+			instructions = ImageIO.read(getClass().getResource("/arrow.png"));
 		} catch (IOException e) {
 			System.out.println(e);
 		}

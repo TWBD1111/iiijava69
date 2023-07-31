@@ -3,7 +3,7 @@ package test123;
 import javax.swing.JFrame;
 
 public class WindowGame {
-    public static final int WIDTH = 465, HEIGHT = 629;
+    public static final int WIDTH = 465, HEIGHT = 645;
 
     private Board board;
     private Title title;
@@ -11,7 +11,7 @@ public class WindowGame {
 
     public WindowGame() {
 
-        window = new JFrame("Tetris");
+        window = new JFrame("俄羅斯方塊");
         window.setSize(WIDTH, HEIGHT);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);

@@ -61,7 +61,7 @@ public class Shape {
             }
             checkLine();
             
-            board.addScore();
+            
             
             board.setCurrentShape();
             timePassedFromCollision = -1;
@@ -151,7 +151,10 @@ public class Shape {
             	//如果當前行不是完整的行，則將size減少 1，向上移動一行
             	size--;
                 
+            }else {
+            	board.addScore();
             }
+            
             
         }
        
