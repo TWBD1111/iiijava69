@@ -19,5 +19,11 @@
 	<hr>
 	<%@ include file="test26.jsp"%>
 	<hr>
+	<jsp:include page="test27.jsp">
+		<jsp:param value="100" name="x"/>
+		<jsp:param value="33" name="y"/>
+			
+	</jsp:include>
+
 </body>
 </html>
