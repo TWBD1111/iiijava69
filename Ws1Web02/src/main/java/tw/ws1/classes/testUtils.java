@@ -37,15 +37,39 @@ public class testUtils {
 		return String.format("Ya! %s", name);
 	}
 
-	public static String calc(String x, String y) {
+	public static String calc(String x, String y, String op) {
 		try {
-		int intX = Integer.parseInt(x);
-		int intY = Integer.parseInt(y);
-		return intX + intY +"";
-	
-		}catch(Exception e){
+
+			int intX = Integer.parseInt(x);
+			int intY = Integer.parseInt(y);
+			int r, mod;
+			r=mod=0;
+			String ret = "";
+			switch (op) {
+			case "1":
+				r = intX + intY;
+				ret += r;
+				break;
+			case "2":
+				r = intX - intY;
+				ret += r;
+				break;
+			case "3":
+				r = intX * intY;
+				ret += r;
+				break;
+			case "4":
+				r = intX / intY;
+				mod = intX % intY;
+				ret += r + "...." + mod;
+				break;
+
+			}
+			return ret;
+
+		} catch (Exception e) {
 			return "";
-			
+
 		}
 	}
 
