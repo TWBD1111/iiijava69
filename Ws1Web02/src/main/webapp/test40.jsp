@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<%
+		String method = request.getMethod();
+		ServletRequest sr = pageContext.getRequest();
+		if(request==sr){
+			out.print("ok<br>");
+		}
+		if(sr instanceof HttpServletRequest){
+			out.print("i am ");
+		}
+	%>
 </body>
 </html>
